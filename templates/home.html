@@ -1,26 +1,22 @@
-{% extends 'layout.html' %}
+{% extends 'layout.html' %} {% block title %} {{ title }} - {{ super() }} {% endblock %} {% block content %}
+<h1 class="ui header">Home</h1>
 
-{% block title %}
-  {{ title }} - {{ super() }}
-{% endblock %}
-
-{% block content %}
-  <h1 class="ui header">Home</h1>
-
-  <table class="ui celled table">
+<table class="ui celled table">
     <thead>
-      <tr>
-        <th>Full Name</th>
-        <th>e-Mail</th>
-      </tr>
+        <tr>
+            <th>First Name</th>
+            <th>Second Name</th>
+            <th>e-Mail</th>
+        </tr>
     </thead>
     <tbody>
-      {% for user in users %}
+        {% for user in users %}
         <tr>
-          <td>{{ user.full_name }}</td>
-          <td>{{ user.e_mail }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.second_name }}</td>
+            <td>{{ user.e_mail }}</td>
         </tr>
-      {% endfor %}
+        {% endfor %}
     </tbody>
-  </table>
+</table>
 {% endblock %}
