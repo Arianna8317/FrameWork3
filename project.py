@@ -9,7 +9,7 @@ app = Flask(__name__)
 logger = Logger(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///register.db'
 db.init_app(app)
-#csrf = CSRFProtect(app)
+csrf = CSRFProtect(app)
 
 
 @app.cli.command("init-db")
@@ -27,18 +27,15 @@ def home():
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-
+    pswd = form.password.data
     if request.method == 'POST' and form.validate():
-        first_name=form.first_name.data,
+    
+        user = User(first_name=form.first_name.data,
         second_name=form.second_name.data,
         e_mail=form.e_mail.data,
         password=form.password.data
-        user = User(
-          first_name,   second_name,
-          e_mail,
-          password
-        )
-        user.set_password()
+           )
+        user.set_password(pswd)
         db.session.add(user)
         db.session.commit()
 
